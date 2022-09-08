@@ -1,5 +1,6 @@
 package latecurio.ratpack;
 
+import com.newrelic.api.agent.NewRelic;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
 
@@ -10,6 +11,7 @@ public class HelloHandler implements Handler {
     public void handle(Context ctx) {
         Map<String, String> queryParams = ctx.getRequest().getQueryParams();
         String name = queryParams.get("name");
+        NewRelic.setTransactionName("Ratpack", "/hello " + name);
         ctx.render(String.format("Hello %s!", name));
     }
 }
