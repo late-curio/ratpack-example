@@ -310,4 +310,4 @@ production:
 staging:
   <<: *default_settings
   host: staging-collector.newrelic.com
-  app_name: ratpack-eg
+  app_name: ratpack-eg (all the things)
