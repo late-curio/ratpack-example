@@ -1,5 +1,6 @@
 package latecurio.ratpack;
 
+import com.newrelic.api.agent.NewRelic;
 import io.netty.buffer.PooledByteBufAllocator;
 import ratpack.exec.Promise;
 import ratpack.func.Pair;
@@ -30,6 +31,7 @@ public class DefaultHandler implements Handler {
     public void handle(Context ctx) {
         Map<String, String> queryParams = ctx.getRequest().getQueryParams();
         String name = queryParams.get("name");
+        NewRelic.setTransactionName("Ratpack", "Talk to " + name);
         URI uri = URI.create("http://localhost:5050/hello?name=" + name);
         Promise<Pair<ReceivedResponse, ReceivedResponse>> helloResponse = httpClient.get(uri)
                 .right(httpClient.get(URI.create("http://localhost:5050/goodbye?name=" + name)));

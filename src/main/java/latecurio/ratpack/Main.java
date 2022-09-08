@@ -9,7 +9,7 @@ public class Main {
                 .handlers(chain -> chain
                         .get(new DefaultHandler())
                         .get("hello", new HelloHandler())
-                        .get("goodbye", new GoodbyeHandler() )
+                        .get("goodbye", new GoodbyeHandler())
                 )
         );
     }
