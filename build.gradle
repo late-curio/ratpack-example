@@ -18,4 +18,13 @@ dependencies {
   runtimeOnly "org.slf4j:slf4j-simple:1.7.36"
 }
 
-mainClassName = "latecurio.ratpack.Main"
+application {
+  mainClass = 'latecurio.ratpack.Main'
+  applicationDefaultJvmArgs = [
+          "-javaagent:${project.projectDir}/newrelic/newrelic.jar",
+          "-Dnewrelic.config.file=${project.projectDir}/newrelic/newrelic.yml",
+          // Uncomment if you want to specify an environment other than production
+          "-Dnewrelic.environment=staging",
+          "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+  ]
+}
